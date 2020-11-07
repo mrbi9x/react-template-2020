@@ -2,7 +2,7 @@ import { Box, Button, Grid, IconButton } from "@material-ui/core";
 import React from "react";
 import { Add, Remove } from "@material-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { COUNTER_ACTION } from "../../utils/action-type";
+import { increment, decrement, reset } from "./couterSlice";
 
 function Counter() {
   const { count } = useSelector((state) => state.counter);
@@ -27,7 +27,7 @@ function Counter() {
         >
           <IconButton
             aria-label="Decrement"
-            onClick={() => dispatch({ type: COUNTER_ACTION.DECREMENT })}
+            onClick={() => dispatch(decrement())}
           >
             <Remove />
           </IconButton>
@@ -35,13 +35,13 @@ function Counter() {
             variant="text"
             color="primary"
             size="small"
-            onClick={() => dispatch({ type: COUNTER_ACTION.RESET })}
+            onClick={() => dispatch(reset())}
           >
             Reset
           </Button>
           <IconButton
             aria-label="Increment"
-            onClick={() => dispatch({ type: COUNTER_ACTION.INCREMENT })}
+            onClick={() => dispatch(increment())}
           >
             <Add />
           </IconButton>
