@@ -2,7 +2,13 @@ import { Box, Button, Grid, IconButton } from "@material-ui/core";
 import React from "react";
 import { Add, Remove } from "@material-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { increment, decrement, reset } from "./couterSlice";
+import {
+  increment,
+  decrement,
+  reset,
+  asyncMinusRandom,
+  asyncPlusRandom,
+} from "./couterSlice";
 
 function Counter() {
   const { count } = useSelector((state) => state.counter);
@@ -25,7 +31,16 @@ function Counter() {
           justifyContent="center"
           alignContent="center"
         >
+          <Button
+            variant="text"
+            color="primary"
+            size="small"
+            onClick={() => dispatch(asyncMinusRandom())}
+          >
+            Async minus random
+          </Button>
           <IconButton
+            color="primary"
             aria-label="Decrement"
             onClick={() => dispatch(decrement())}
           >
@@ -40,11 +55,20 @@ function Counter() {
             Reset
           </Button>
           <IconButton
+            color="primary"
             aria-label="Increment"
             onClick={() => dispatch(increment())}
           >
             <Add />
           </IconButton>
+          <Button
+            variant="text"
+            color="primary"
+            size="small"
+            onClick={() => dispatch(asyncPlusRandom())}
+          >
+            Async plus random
+          </Button>
         </Box>
       </Box>
     </Grid>

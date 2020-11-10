@@ -7,8 +7,9 @@ import {
   Toolbar,
   Typography,
 } from "@material-ui/core";
-import Counter from "./pages/counter/Counter";
 import theme from "./configs/theme";
+import Counter from "./pages/counter/Counter";
+import Todos from "./pages/todos/Todos";
 
 function App() {
   return (
@@ -23,6 +24,9 @@ function App() {
         <Container maxWidth="sm">
           <Paper>
             <Counter />
+          </Paper>
+          <Paper>
+            <Todos></Todos>
           </Paper>
         </Container>
       </ThemeProvider>
