@@ -1,3 +1,4 @@
+import { Typography } from "@material-ui/core";
 import React from "react";
 // import {
 //   List,
@@ -8,11 +9,15 @@ import React from "react";
 // import { useSelector, useDispatch } from "react-redux";
 // import { addTodo, removeTodo, toggleTodo } from "./todoSlice";
 import TodoList from "./TodoList";
+import TodoNew from "./TodoNew";
 
 const Todos = () => {
   return (
     <>
-      <h3>Todos</h3>
+      <Typography variant="h5" color="initial" align="center">
+        Todos
+      </Typography>
+      <TodoNew />
       <TodoList />
     </>
   );

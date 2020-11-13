@@ -16,7 +16,7 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <AppBar position="static" color="default">
+        <AppBar position="sticky" color="default">
           <Toolbar>
             <Typography variant="h6">React template</Typography>
           </Toolbar>

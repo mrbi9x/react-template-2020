@@ -25,7 +25,7 @@ function TodoListItem(props) {
         onChange={() => handlerToggleTodo(props.id)}
         color="primary"
       />
-      <ListItemText primary={props.id}></ListItemText>
+      <ListItemText primary={todo.content}></ListItemText>
       <ListItemSecondaryAction>
         <IconButton onClick={() => dispatch(removeTodo({ id: props.id }))}>
           <Delete />
