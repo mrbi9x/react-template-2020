@@ -1,4 +1,4 @@
-import { Box, Button, Grid, IconButton } from "@material-ui/core";
+import { Box, Button, Grid, IconButton, InputBase } from "@material-ui/core";
 import React from "react";
 import { Add, Remove } from "@material-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,7 +14,7 @@ function Counter() {
   const { count } = useSelector((state) => state.counter);
   const dispatch = useDispatch();
   return (
-    <Grid>
+    <Grid sm={12}>
       <Box
         display="flex"
         flexDirection="column"
@@ -31,14 +31,6 @@ function Counter() {
           justifyContent="center"
           alignContent="center"
         >
-          <Button
-            variant="text"
-            color="primary"
-            size="small"
-            onClick={() => dispatch(asyncMinusRandom())}
-          >
-            Async minus random
-          </Button>
           <IconButton
             color="primary"
             aria-label="Decrement"
@@ -61,6 +53,22 @@ function Counter() {
           >
             <Add />
           </IconButton>
+        </Box>
+        <Box
+          display="flex"
+          flexDirection="row"
+          justifyContent="center"
+          alignContent="center"
+        >
+          <Button
+            variant="text"
+            color="primary"
+            size="small"
+            onClick={() => dispatch(asyncMinusRandom())}
+          >
+            Async minus random
+          </Button>
+          <InputBase />
           <Button
             variant="text"
             color="primary"

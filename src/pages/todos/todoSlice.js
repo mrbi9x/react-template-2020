@@ -1,13 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { v4 as uuid } from "uuid";
 
-const INITIAL_STATE = [
-  {
-    id: uuid(),
-    content: "test todo 01",
-    isComplite: false,
-  },
-];
+const INITIAL_STATE = [];
 
 const todosSlice = createSlice({
   name: "todos",

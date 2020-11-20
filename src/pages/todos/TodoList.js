@@ -8,7 +8,11 @@ function TodoList() {
   const todos = useSelector(todosSelector);
   return (
     <>
-      {!todos?.length > 0 && <Typography>No todo.</Typography>}
+      {!todos?.length > 0 && (
+        <>
+          <Typography align="center">No todo.</Typography>
+        </>
+      )}
       <List>
         {todos &&
           todos.map((todo, idx) => {

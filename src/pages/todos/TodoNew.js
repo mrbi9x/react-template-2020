@@ -21,7 +21,7 @@ function TodoNew() {
     <form noValidate onSubmit={(e) => handlerAddTodo(e)}>
       <Grid
         container
-        // spacing={5}
+        spacing={2}
         direction="row"
         justify="center"
         alignItems="center"

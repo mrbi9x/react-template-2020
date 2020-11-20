@@ -1,36 +1,32 @@
-import {
-  ThemeProvider,
-  CssBaseline,
-  AppBar,
-  Container,
-  Paper,
-  Toolbar,
-  Typography,
-} from "@material-ui/core";
+import { ThemeProvider, CssBaseline, Container } from "@material-ui/core";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Header from "./components/Header";
 import theme from "./configs/theme";
 import Counter from "./pages/counter/Counter";
 import Todos from "./pages/todos/Todos";
 
 function App() {
   return (
-    <>
-      <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
+      <Router>
         <CssBaseline />
-        <AppBar position="sticky" color="default">
-          <Toolbar>
-            <Typography variant="h6">React template</Typography>
-          </Toolbar>
-        </AppBar>
-        <Container maxWidth="sm">
-          <Paper>
-            <Counter />
-          </Paper>
-          <Paper>
-            <Todos></Todos>
-          </Paper>
+        <Header />
+        <Container maxWidth="lg">
+          <Switch>
+            <Route path="/counter">
+              <Counter />
+            </Route>
+            <Route path="/todos">
+              <Todos />
+            </Route>
+            <Route path="/posts">
+              <Todos />
+            </Route>
+          </Switch>
         </Container>
-      </ThemeProvider>
-    </>
+        {/* <Container maxWidth="sm"></Container> */}
+      </Router>
+    </ThemeProvider>
   );
 }
 
