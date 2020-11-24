@@ -20,20 +20,24 @@ const counterSlice = createSlice({
   },
 });
 
-export const asyncMinusRandom = () => {
+export const asyncMinusByAmount = (amount) => {
+  if (!Number.isInteger(amount)) {
+    return;
+  }
   return async (dispatch) => {
-    let ranNum = Math.floor(Math.random() * 10 + 1);
     setTimeout(() => {
-      dispatch(decrement({ count: ranNum }));
+      dispatch(decrement({ count: amount }));
     }, 2000);
   };
 };
 
-export const asyncPlusRandom = () => {
+export const asyncPlusByAmount = (amount) => {
+  if (!Number.isInteger(amount)) {
+    return;
+  }
   return async (dispatch) => {
-    let ranNum = Math.floor(Math.random() * 10 + 1);
     setTimeout(() => {
-      dispatch(increment({ count: ranNum }));
+      dispatch(increment({ count: amount }));
     }, 2000);
   };
 };

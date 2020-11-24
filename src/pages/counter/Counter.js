@@ -1,20 +1,52 @@
-import { Box, Button, Grid, IconButton, InputBase } from "@material-ui/core";
-import React from "react";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Grid,
+  IconButton,
+  TextField,
+} from "@material-ui/core";
+import React, { useState } from "react";
 import { Add, Remove } from "@material-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
 import {
   increment,
   decrement,
   reset,
-  asyncMinusRandom,
-  asyncPlusRandom,
+  asyncMinusByAmount,
+  asyncPlusByAmount,
 } from "./couterSlice";
 
 function Counter() {
   const { count } = useSelector((state) => state.counter);
+  const [amount, setamount] = useState(0);
+  const [amountError, setamountError] = useState(false);
+  const [loading, setLoading] = useState("idle");
   const dispatch = useDispatch();
+  const handlerAmountChange = (event) => {
+    const value = event.target.value;
+    if (Number.isInteger(+value)) {
+      setamount(+value);
+      setamountError(false);
+    } else {
+      setamountError(true);
+      setamount(+amount);
+    }
+  };
+  const handlerAsyncCounterByAmount = (isIncrement) => {
+    if (!Number.isInteger(+amount)) {
+      return;
+    }
+    setLoading("loading");
+    if (isIncrement) {
+      dispatch(asyncPlusByAmount(amount));
+    } else {
+      dispatch(asyncMinusByAmount(amount));
+    }
+    setLoading("idle");
+  };
   return (
-    <Grid sm={12}>
+    <Grid item sm={12}>
       <Box
         display="flex"
         flexDirection="column"
@@ -64,18 +96,29 @@ function Counter() {
             variant="text"
             color="primary"
             size="small"
-            onClick={() => dispatch(asyncMinusRandom())}
+            disabled={loading !== "idle"}
+            onClick={() => handlerAsyncCounterByAmount(true)}
           >
-            Async minus random
+            {loading === "idle" ? "Async plus random" : <CircularProgress />}
           </Button>
-          <InputBase />
+          <TextField
+            id="counterNumberChange"
+            label="Number"
+            variant="outlined"
+            size="small"
+            type="number"
+            event={amount}
+            onChange={handlerAmountChange}
+            error={amountError}
+          />
           <Button
             variant="text"
             color="primary"
             size="small"
-            onClick={() => dispatch(asyncPlusRandom())}
+            disabled={loading !== "idle"}
+            onClick={() => handlerAsyncCounterByAmount(false)}
           >
-            Async plus random
+            {loading === "idle" ? "Async plus random" : <CircularProgress />}
           </Button>
         </Box>
       </Box>

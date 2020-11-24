@@ -1,4 +1,10 @@
-import { ThemeProvider, CssBaseline, Container } from "@material-ui/core";
+import {
+  ThemeProvider,
+  CssBaseline,
+  Container,
+  Paper,
+  Box,
+} from "@material-ui/core";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "./components/Header";
 import theme from "./configs/theme";
@@ -12,19 +18,25 @@ function App() {
         <CssBaseline />
         <Header />
         <Container maxWidth="lg">
-          <Switch>
-            <Route path="/counter">
-              <Counter />
-            </Route>
-            <Route path="/todos">
-              <Todos />
-            </Route>
-            <Route path="/posts">
-              <Todos />
-            </Route>
-          </Switch>
+          <Box my={2}>
+            <Paper>
+              <Switch>
+                <Route path="/counter">
+                  <Counter />
+                </Route>
+                <Route path="/todos">
+                  <Todos />
+                </Route>
+                <Route path="/posts">
+                  <Todos />
+                </Route>
+                <Route path="/">
+                  <Counter />
+                </Route>
+              </Switch>
+            </Paper>
+          </Box>
         </Container>
-        {/* <Container maxWidth="sm"></Container> */}
       </Router>
     </ThemeProvider>
   );
