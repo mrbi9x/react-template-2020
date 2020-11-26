@@ -36,7 +36,7 @@ function TodoNew() {
             variant="outlined"
             value={todoContent}
             size="small"
-            autoComplete="false"
+            autoComplete="off"
             onChange={(e) => setTodoContent(e.target.value)}
           />
         </Grid>

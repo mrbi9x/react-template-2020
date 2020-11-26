@@ -5,13 +5,13 @@ import {
   Tabs,
   Tab,
   Grid,
-  IconButton,
   Container,
+  Avatar,
   makeStyles,
 } from "@material-ui/core";
-import { AccountCircle, BubbleChart } from "@material-ui/icons";
+import { BubbleChart } from "@material-ui/icons";
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
   brandHeader: {
@@ -46,12 +46,12 @@ function Header() {
             alignContent="center"
             alignItems="center"
           >
-            <Link to="/" className={classes.brandHeader}>
+            <NavLink to="/" className={classes.brandHeader}>
               <BubbleChart color="secondary" fontSize="large" />
               <Typography color="primary" variant="h6" component="span" noWrap>
                 React template
               </Typography>
-            </Link>
+            </NavLink>
             <Tabs
               value={activeTabNav}
               onChange={handlerTabNavChange}
@@ -65,9 +65,7 @@ function Header() {
               <Tab label="Todos" value="todos" disableRipple />
               <Tab label="Posts" value="posts" disableRipple />
             </Tabs>
-            <IconButton aria-label="Account">
-              <AccountCircle />
-            </IconButton>
+            <Avatar />
           </Grid>
         </Toolbar>
       </Container>

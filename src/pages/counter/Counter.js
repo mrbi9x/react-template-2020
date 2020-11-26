@@ -47,10 +47,11 @@ function Counter() {
         flexDirection="column"
         justifyContent="center"
         alignContent="center"
-        m={5}
       >
-        <Button variant="text" color="primary" size="small">
-          {count}
+        <Button variant="text" color="primary" size="large">
+          <Typography variant="h3" color="secondary" align="center">
+            {count}
+          </Typography>
         </Button>
         <Box
           display="flex"
@@ -67,7 +68,7 @@ function Counter() {
           </IconButton>
           <Button
             variant="text"
-            color="primary"
+            color="secondary"
             size="small"
             onClick={() => dispatch(reset())}
           >
@@ -86,7 +87,7 @@ function Counter() {
           flexDirection="row"
           justifyContent="center"
           alignContent="center"
-          m={2}
+          my={2}
         >
           <Button
             variant="text"
@@ -100,7 +101,7 @@ function Counter() {
               variant="button"
               color="initial"
               noWrap
-            >{`Async minus by ${amount}`}</Typography>
+            >{`${amount} Async`}</Typography>
           </Button>
           <TextField
             id="counterNumberChange"
@@ -122,7 +123,7 @@ function Counter() {
               variant="button"
               color="initial"
               noWrap
-            >{`Async plus by ${amount}`}</Typography>
+            >{`Async ${amount}`}</Typography>
           </Button>
         </Box>
       </Box>
