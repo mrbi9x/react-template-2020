@@ -18,7 +18,12 @@ function TodoNew() {
   }
 
   return (
-    <form noValidate onSubmit={(e) => handlerAddTodo(e)}>
+    <form
+      onSubmit={(e) => handlerAddTodo(e)}
+      noValidate
+      autoComplete="off"
+      width="100%"
+    >
       <Grid
         container
         spacing={2}
@@ -28,7 +33,7 @@ function TodoNew() {
         alignContent="center"
         wrap="nowrap"
       >
-        <Grid item sm={8}>
+        <Grid item xs={8}>
           <TextField
             fullWidth
             id="todo-new"
@@ -40,7 +45,7 @@ function TodoNew() {
             onChange={(e) => setTodoContent(e.target.value)}
           />
         </Grid>
-        <Grid item sm={4}>
+        <Grid item xs={2}>
           <Button
             variant="contained"
             color="primary"

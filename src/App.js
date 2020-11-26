@@ -4,13 +4,15 @@ import {
   Container,
   Paper,
   Box,
+  Hidden,
 } from "@material-ui/core";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Header from "./components/Header";
-import theme from "./configs/theme";
-import Counter from "./pages/counter/Counter";
-import Todos from "./pages/todos/Todos";
-import BottomNavigatorBar from "./components/BottomNavigatorBar";
+import Header from "components/Header";
+import theme from "configs/theme";
+import Counter from "pages/counter/Counter";
+import Todos from "pages/todos/Todos";
+import BottomNavigatorBar from "components/BottomNavigatorBar";
+import HomePage from "pages/Home/HomePage";
 
 function App() {
   return (
@@ -32,11 +34,12 @@ function App() {
                   <Todos />
                 </Route>
                 <Route path="/">
-                  <Counter />
+                  <HomePage />
                 </Route>
               </Switch>
             </Paper>
           </Box>
+          <Hidden smUp>smUp</Hidden>
           <BottomNavigatorBar />
         </Container>
       </Router>

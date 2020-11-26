@@ -2,18 +2,17 @@ import {
   AppBar,
   Toolbar,
   Typography,
-  Tabs,
-  Tab,
   Grid,
   Container,
   Avatar,
   Badge,
   makeStyles,
+  IconButton,
 } from "@material-ui/core";
 import { BubbleChart } from "@material-ui/icons";
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   brandHeader: {
@@ -31,16 +30,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Header() {
-  const [activeTabNav, setActiveTabNav] = useState("counter");
   const notifyCount = useSelector((state) => state.counter.count);
-  const todosCount = useSelector((state) => state.todos.length);
   const classes = useStyles();
-  const history = useHistory();
-
-  const handlerTabNavChange = (event, newValue) => {
-    setActiveTabNav(newValue);
-    history.push(`/${newValue}`);
-  };
 
   return (
     <AppBar position="sticky" color="default">
@@ -60,26 +51,18 @@ function Header() {
                 React template
               </Typography>
             </NavLink>
-            <Tabs
-              value={activeTabNav}
-              onChange={handlerTabNavChange}
-              aria-label="Navigation"
-              color="primary"
-              textColor="primary"
-              indicatorColor="primary"
-              centered
+            <IconButton
+              aria-label="current user"
+              onClick={(e) => console.log(e)}
             >
-              <Tab label="Counter" value="counter" disableRipple />
-              <Tab label={`todos(${todosCount})`} value="todos" disableRipple />
-              <Tab label="Posts" value="posts" disableRipple />
-            </Tabs>
-            <Badge
-              badgeContent={notifyCount}
-              color="error"
-              invisible={notifyCount < 1}
-            >
-              <Avatar className={classes.smallAvatar} />
-            </Badge>
+              <Badge
+                badgeContent={notifyCount}
+                color="error"
+                invisible={notifyCount < 1}
+              >
+                <Avatar className={classes.smallAvatar} />
+              </Badge>
+            </IconButton>
           </Grid>
         </Toolbar>
       </Container>

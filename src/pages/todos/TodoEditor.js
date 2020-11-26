@@ -1,10 +1,25 @@
 import React, { useState } from "react";
-import { IconButton, Input } from "@material-ui/core";
-import { Save, Undo } from "@material-ui/icons";
+import { IconButton, Input, makeStyles } from "@material-ui/core";
+import { Undo, Edit } from "@material-ui/icons";
 import { updateTodo } from "./todoSlice";
 import { useDispatch } from "react-redux";
 
+const useStyle = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    marginRight: theme.spacing(4),
+    justifyContent: "space-around",
+    " & > * ": {
+      marginRight: theme.spacing(2),
+    },
+  },
+  autoFlexGrow: {
+    flex: 1,
+  },
+}));
+
 const TodoEditor = ({ id, content, handlerToggleEdit }) => {
+  const classes = useStyle();
   const [value, setValue] = useState(content);
   const [isError, setIsError] = useState(false);
   const dispatch = useDispatch();
@@ -22,8 +37,15 @@ const TodoEditor = ({ id, content, handlerToggleEdit }) => {
     handlerToggleEdit(e);
   };
   return (
-    <form width="100%" onSubmit={handlerUpdateTodo}>
+    <form
+      className={classes.root}
+      onSubmit={handlerUpdateTodo}
+      noValidate
+      autoComplete="off"
+    >
       <Input
+        className={classes.autoFlexGrow}
+        fullWidth
         autoFocus
         error={isError}
         value={value}
@@ -35,7 +57,7 @@ const TodoEditor = ({ id, content, handlerToggleEdit }) => {
         size="small"
         type="submit"
       >
-        <Save />
+        <Edit />
       </IconButton>
       <IconButton
         aria-label="Cancel"

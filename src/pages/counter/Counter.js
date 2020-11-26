@@ -41,7 +41,7 @@ function Counter() {
     }
   };
   return (
-    <Grid item sm={12}>
+    <Grid item>
       <Box
         display="flex"
         flexDirection="column"
@@ -110,6 +110,8 @@ function Counter() {
             size="small"
             value={amount}
             onChange={handlerAmountChange}
+            autoComplete="off"
+            type="number"
           />
           <Button
             variant="text"
