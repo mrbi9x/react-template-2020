@@ -10,6 +10,7 @@ import Header from "./components/Header";
 import theme from "./configs/theme";
 import Counter from "./pages/counter/Counter";
 import Todos from "./pages/todos/Todos";
+import BottomNavigatorBar from "./components/BottomNavigatorBar";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
               </Switch>
             </Paper>
           </Box>
+          <BottomNavigatorBar />
         </Container>
       </Router>
     </ThemeProvider>

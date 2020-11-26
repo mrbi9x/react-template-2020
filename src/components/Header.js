@@ -7,13 +7,15 @@ import {
   Grid,
   Container,
   Avatar,
+  Badge,
   makeStyles,
 } from "@material-ui/core";
 import { BubbleChart } from "@material-ui/icons";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   brandHeader: {
     display: "flex",
     alignItems: "center",
@@ -22,10 +24,16 @@ const useStyles = makeStyles({
       letterSpacing: 0,
     },
   },
-});
+  smallAvatar: {
+    width: theme.spacing(4),
+    height: theme.spacing(4),
+  },
+}));
 
 function Header() {
   const [activeTabNav, setActiveTabNav] = useState("counter");
+  const notifyCount = useSelector((state) => state.counter.count);
+  const todosCount = useSelector((state) => state.todos.length);
   const classes = useStyles();
   const history = useHistory();
 
@@ -62,10 +70,16 @@ function Header() {
               centered
             >
               <Tab label="Counter" value="counter" disableRipple />
-              <Tab label="Todos" value="todos" disableRipple />
+              <Tab label={`todos(${todosCount})`} value="todos" disableRipple />
               <Tab label="Posts" value="posts" disableRipple />
             </Tabs>
-            <Avatar />
+            <Badge
+              badgeContent={notifyCount}
+              color="error"
+              invisible={notifyCount < 1}
+            >
+              <Avatar className={classes.smallAvatar} />
+            </Badge>
           </Grid>
         </Toolbar>
       </Container>
