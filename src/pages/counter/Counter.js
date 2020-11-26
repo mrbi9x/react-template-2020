@@ -5,6 +5,7 @@ import {
   Grid,
   IconButton,
   TextField,
+  Typography,
 } from "@material-ui/core";
 import React, { useState } from "react";
 import { Add, Remove } from "@material-ui/icons";
@@ -18,18 +19,14 @@ import {
 } from "./couterSlice";
 
 function Counter() {
-  const { count } = useSelector((state) => state.counter);
-  const [amount, setamount] = useState(0);
-  const [amountError, setamountError] = useState(false);
-  const [loading, setLoading] = useState("idle");
+  const { count, loading } = useSelector((state) => state.counter);
+  const [amount, setamount] = useState(1);
   const dispatch = useDispatch();
   const handlerAmountChange = (event) => {
     const value = event.target.value;
     if (Number.isInteger(+value)) {
       setamount(+value);
-      setamountError(false);
     } else {
-      setamountError(true);
       setamount(+amount);
     }
   };
@@ -37,13 +34,11 @@ function Counter() {
     if (!Number.isInteger(+amount)) {
       return;
     }
-    setLoading("loading");
     if (isIncrement) {
       dispatch(asyncPlusByAmount(amount));
     } else {
       dispatch(asyncMinusByAmount(amount));
     }
-    setLoading("idle");
   };
   return (
     <Grid item sm={12}>
@@ -52,7 +47,7 @@ function Counter() {
         flexDirection="column"
         justifyContent="center"
         alignContent="center"
-        mt={2}
+        m={5}
       >
         <Button variant="text" color="primary" size="small">
           {count}
@@ -91,34 +86,43 @@ function Counter() {
           flexDirection="row"
           justifyContent="center"
           alignContent="center"
+          m={2}
         >
           <Button
             variant="text"
             color="primary"
             size="small"
-            disabled={loading !== "idle"}
-            onClick={() => handlerAsyncCounterByAmount(true)}
+            disabled={loading}
+            startIcon={loading ? <CircularProgress size="1rem" /> : <Remove />}
+            onClick={() => handlerAsyncCounterByAmount(false)}
           >
-            {loading === "idle" ? "Async plus random" : <CircularProgress />}
+            <Typography
+              variant="button"
+              color="initial"
+              noWrap
+            >{`Async minus by ${amount}`}</Typography>
           </Button>
           <TextField
             id="counterNumberChange"
             label="Number"
             variant="outlined"
             size="small"
-            type="number"
-            event={amount}
+            value={amount}
             onChange={handlerAmountChange}
-            error={amountError}
           />
           <Button
             variant="text"
             color="primary"
             size="small"
-            disabled={loading !== "idle"}
-            onClick={() => handlerAsyncCounterByAmount(false)}
+            disabled={loading}
+            endIcon={loading ? <CircularProgress size="1rem" /> : <Add />}
+            onClick={() => handlerAsyncCounterByAmount(true)}
           >
-            {loading === "idle" ? "Async plus random" : <CircularProgress />}
+            <Typography
+              variant="button"
+              color="initial"
+              noWrap
+            >{`Async plus by ${amount}`}</Typography>
           </Button>
         </Box>
       </Box>

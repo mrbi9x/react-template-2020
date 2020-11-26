@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = { count: 0 };
+const initialState = { count: 0, loading: false };
 
 const counterSlice = createSlice({
   name: "counter",
@@ -8,14 +8,20 @@ const counterSlice = createSlice({
   reducers: {
     increment(state, action) {
       let count = action.payload ? action.payload.count : 1;
-      return { count: state.count + count };
+      state.count = state.count + count;
     },
     decrement(state, action) {
       let count = action.payload ? action.payload.count : 1;
-      return { count: state.count - count };
+      state.count = state.count - count;
     },
     reset() {
       return initialState;
+    },
+    startLoading(state, action) {
+      state.loading = true;
+    },
+    endLoading(state, action) {
+      state.loading = false;
     },
   },
 });
@@ -25,8 +31,10 @@ export const asyncMinusByAmount = (amount) => {
     return;
   }
   return async (dispatch) => {
+    dispatch(startLoading());
     setTimeout(() => {
       dispatch(decrement({ count: amount }));
+      dispatch(endLoading());
     }, 2000);
   };
 };
@@ -36,11 +44,19 @@ export const asyncPlusByAmount = (amount) => {
     return;
   }
   return async (dispatch) => {
+    dispatch(startLoading());
     setTimeout(() => {
       dispatch(increment({ count: amount }));
+      dispatch(endLoading());
     }, 2000);
   };
 };
 
-export const { increment, decrement, reset } = counterSlice.actions;
+export const {
+  increment,
+  decrement,
+  reset,
+  startLoading,
+  endLoading,
+} = counterSlice.actions;
 export default counterSlice.reducer;
