@@ -45,6 +45,8 @@ const TodoEditor = ({ id, content, handlerToggleEdit }) => {
     >
       <Input
         className={classes.autoFlexGrow}
+        multiline
+        rowsMax={3}
         fullWidth
         autoFocus
         error={isError}

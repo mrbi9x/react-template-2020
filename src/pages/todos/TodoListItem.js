@@ -51,16 +51,11 @@ const TodoListItem = (props) => {
           handlerToggleEdit={handlerToggleEdit}
         />
       ) : (
-        // <ListItemText
-        //   primary={todo.content}
-        //   onClick={(e) => handlerToggleEdit(e)}
-        // />
         <Typography
           className={classes.autoFlexGrow}
           variant="inherit"
           color="initial"
           onClick={(e) => handlerToggleEdit(e)}
-          noWrap
         >
           {todo.content}
         </Typography>

@@ -15,6 +15,9 @@ import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
+  appBar: {
+    backgroundColor: theme.palette.background.paper,
+  },
   brandHeader: {
     display: "flex",
     alignItems: "center",
@@ -34,9 +37,9 @@ function Header() {
   const classes = useStyles();
 
   return (
-    <AppBar position="sticky" color="default">
+    <AppBar position="sticky" className={classes.appBar}>
       <Container maxWidth="lg">
-        <Toolbar>
+        <Toolbar disableGutters>
           <Grid
             container
             item
