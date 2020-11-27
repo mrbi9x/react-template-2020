@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import counter from "../pages/counter/couterSlice";
-import todos from "../pages/Todos/todoSlice";
+import todos from "../pages/todos/todoSlice";
 
 const rootReducer = combineReducers({
   counter,

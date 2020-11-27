@@ -7,12 +7,12 @@ import {
   Hidden,
 } from "@material-ui/core";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Header from "components/Header";
-import theme from "configs/theme";
-import Counter from "pages/counter/Counter";
-import Todos from "pages/Todos/Todos";
-import BottomNavigatorBar from "components/BottomNavigatorBar";
-import HomePage from "pages/Home/HomePage";
+import Header from "./components/Header";
+import theme from "./configs/theme";
+import Counter from "./pages/counter/Counter";
+import Todos from "./pages/todos/Todos";
+import BottomNavigatorBar from "./components/BottomNavigatorBar";
+import HomePage from "./pages/home/HomePage";
 
 function App() {
   return (
