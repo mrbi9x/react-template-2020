@@ -3,8 +3,9 @@ import {
   BottomNavigationAction,
   Toolbar,
   makeStyles,
+  Badge,
 } from "@material-ui/core";
-import { Home, Menu } from "@material-ui/icons";
+import { Home, Menu, Notifications, Chat } from "@material-ui/icons";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { NavLink, useLocation } from "react-router-dom";
@@ -25,6 +26,11 @@ const BottomNavigatorBar = () => {
   const [currentRoute, setCurrentRoute] = useState(pathname);
   const todosCount = useSelector((state) => state.todos.length);
   const classes = useStyles();
+  const TodoIcon = (
+    <Badge badgeContent={todosCount} color="secondary" max={9} variant="dot">
+      <Chat />
+    </Badge>
+  );
   return (
     <>
       <Toolbar />
@@ -42,18 +48,25 @@ const BottomNavigatorBar = () => {
           to="/"
         />
         <BottomNavigationAction
+          label={"Todos"}
+          value="/todos"
+          icon={TodoIcon}
+          component={NavLink}
+          to="/todos"
+        />
+        <BottomNavigationAction
           label="Counter"
           value="/counter"
-          icon={<Menu />}
+          icon={<Notifications />}
           component={NavLink}
           to="/counter"
         />
         <BottomNavigationAction
-          label={`(${todosCount})Todos`}
-          value="/todos"
+          label="Posts"
+          value="/posts"
           icon={<Menu />}
           component={NavLink}
-          to="/todos"
+          to="/posts"
         />
       </BottomNavigation>
     </>

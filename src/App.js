@@ -36,10 +36,14 @@ function App() {
                 <Route path="/">
                   <HomePage />
                 </Route>
+                <Route path="/">
+                  <HomePage />
+                  <App />
+                </Route>
               </Switch>
             </Paper>
           </Box>
-          <Hidden smUp></Hidden>
+          <Hidden smUp>&nbsp;</Hidden>
           <BottomNavigatorBar />
         </Container>
       </Router>
