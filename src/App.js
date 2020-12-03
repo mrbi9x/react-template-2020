@@ -13,6 +13,7 @@ import Counter from "./pages/counter/Counter";
 import Todos from "./pages/todos/Todos";
 import BottomNavigatorBar from "./components/BottomNavigatorBar";
 import HomePage from "./pages/home/HomePage";
+import Posts from "./pages/posts/Posts";
 
 function App() {
   return (
@@ -31,14 +32,13 @@ function App() {
                   <Todos />
                 </Route>
                 <Route path="/posts">
-                  <Todos />
+                  <Posts />
                 </Route>
                 <Route path="/">
                   <HomePage />
                 </Route>
-                <Route path="/">
+                <Route path="*">
                   <HomePage />
-                  <App />
                 </Route>
               </Switch>
             </Paper>
