@@ -23,25 +23,25 @@ function App() {
         <Header />
         <Container maxWidth="lg">
           <Box my={2}>
-            <Paper>
-              <Switch>
-                <Route path="/counter">
-                  <Counter />
-                </Route>
-                <Route path="/todos">
-                  <Todos />
-                </Route>
-                <Route path="/posts">
-                  <Posts />
-                </Route>
-                <Route path="/">
-                  <HomePage />
-                </Route>
-                <Route path="*">
-                  <HomePage />
-                </Route>
-              </Switch>
-            </Paper>
+            {/* <Paper> */}
+            <Switch>
+              <Route path="/counter">
+                <Counter />
+              </Route>
+              <Route path="/todos">
+                <Todos />
+              </Route>
+              <Route path="/posts">
+                <Posts />
+              </Route>
+              <Route path="/">
+                <HomePage />
+              </Route>
+              <Route path="*">
+                <HomePage />
+              </Route>
+            </Switch>
+            {/* </Paper> */}
           </Box>
           <Hidden smUp>&nbsp;</Hidden>
           <BottomNavigatorBar />

@@ -8,7 +8,14 @@ import {
   CardContent,
   CardMedia,
   Container,
+  // makeStyles,
 } from "@material-ui/core";
+
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+
+//   }
+// }));
 
 export default function Posts() {
   const { entities, status } = useSelector((state) => state.posts);
@@ -23,13 +30,11 @@ export default function Posts() {
     return (
       <Box my={5} key={post.id}>
         <Card>
-          <CardMedia
-            title={post.title}
-            component="img"
-            src={post.url}
-            height="450"
-            // children={<img alt={post.title} src={post.url} />}
-          />
+          <CardMedia>
+            <Box>
+              <img alt={post.title} src={post.url} />
+            </Box>
+          </CardMedia>
           <CardContent>
             <Typography variant="body2" color="initial">
               {post.title}

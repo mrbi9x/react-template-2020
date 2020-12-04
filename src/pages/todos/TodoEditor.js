@@ -4,7 +4,7 @@ import { Undo, Edit } from "@material-ui/icons";
 import { updateTodo } from "./todoSlice";
 import { useDispatch } from "react-redux";
 
-const useStyle = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     marginRight: theme.spacing(4),
@@ -19,7 +19,7 @@ const useStyle = makeStyles((theme) => ({
 }));
 
 const TodoEditor = ({ id, content, handlerToggleEdit }) => {
-  const classes = useStyle();
+  const classes = useStyles();
   const [value, setValue] = useState(content);
   const [isError, setIsError] = useState(false);
   const dispatch = useDispatch();

@@ -4,6 +4,7 @@ import {
   CircularProgress,
   Grid,
   IconButton,
+  Paper,
   TextField,
   Typography,
 } from "@material-ui/core";
@@ -41,95 +42,99 @@ function Counter() {
     }
   };
   return (
-    <Grid item>
-      <Box
-        display="flex"
-        flexDirection="column"
-        justifyContent="center"
-        alignContent="center"
-      >
-        <Button variant="text" color="primary" size="large">
-          <Typography variant="h3" color="secondary" align="center">
-            {count}
-          </Typography>
-        </Button>
+    <Paper>
+      <Grid item>
         <Box
           display="flex"
-          flexDirection="row"
+          flexDirection="column"
           justifyContent="center"
           alignContent="center"
         >
-          <IconButton
-            color="primary"
-            aria-label="Decrement"
-            onClick={() => dispatch(decrement())}
-          >
-            <Remove />
-          </IconButton>
-          <Button
-            variant="text"
-            color="secondary"
-            size="small"
-            onClick={() => dispatch(reset())}
-          >
-            Reset
+          <Button variant="text" color="primary" size="large">
+            <Typography variant="h3" color="secondary" align="center">
+              {count}
+            </Typography>
           </Button>
-          <IconButton
-            color="primary"
-            aria-label="Increment"
-            onClick={() => dispatch(increment())}
+          <Box
+            display="flex"
+            flexDirection="row"
+            justifyContent="center"
+            alignContent="center"
           >
-            <Add />
-          </IconButton>
+            <IconButton
+              color="primary"
+              aria-label="Decrement"
+              onClick={() => dispatch(decrement())}
+            >
+              <Remove />
+            </IconButton>
+            <Button
+              variant="text"
+              color="secondary"
+              size="small"
+              onClick={() => dispatch(reset())}
+            >
+              Reset
+            </Button>
+            <IconButton
+              color="primary"
+              aria-label="Increment"
+              onClick={() => dispatch(increment())}
+            >
+              <Add />
+            </IconButton>
+          </Box>
+          <Box
+            display="flex"
+            flexDirection="row"
+            justifyContent="center"
+            alignContent="center"
+            my={2}
+          >
+            <Button
+              variant="text"
+              color="primary"
+              size="small"
+              disabled={loading}
+              startIcon={
+                loading ? <CircularProgress size="1rem" /> : <Remove />
+              }
+              onClick={() => handlerAsyncCounterByAmount(false)}
+            >
+              <Typography
+                variant="button"
+                color="initial"
+                noWrap
+              >{`${amount} Async`}</Typography>
+            </Button>
+            <TextField
+              id="counterNumberChange"
+              label="Number"
+              variant="outlined"
+              size="small"
+              value={amount}
+              onChange={handlerAmountChange}
+              autoComplete="off"
+              type="number"
+            />
+            <Button
+              variant="text"
+              color="primary"
+              size="small"
+              disabled={loading}
+              endIcon={loading ? <CircularProgress size="1rem" /> : <Add />}
+              onClick={() => handlerAsyncCounterByAmount(true)}
+            >
+              <Typography
+                variant="button"
+                color="initial"
+                noWrap
+              >{`Async ${amount}`}</Typography>
+            </Button>
+          </Box>
         </Box>
-        <Box
-          display="flex"
-          flexDirection="row"
-          justifyContent="center"
-          alignContent="center"
-          my={2}
-        >
-          <Button
-            variant="text"
-            color="primary"
-            size="small"
-            disabled={loading}
-            startIcon={loading ? <CircularProgress size="1rem" /> : <Remove />}
-            onClick={() => handlerAsyncCounterByAmount(false)}
-          >
-            <Typography
-              variant="button"
-              color="initial"
-              noWrap
-            >{`${amount} Async`}</Typography>
-          </Button>
-          <TextField
-            id="counterNumberChange"
-            label="Number"
-            variant="outlined"
-            size="small"
-            value={amount}
-            onChange={handlerAmountChange}
-            autoComplete="off"
-            type="number"
-          />
-          <Button
-            variant="text"
-            color="primary"
-            size="small"
-            disabled={loading}
-            endIcon={loading ? <CircularProgress size="1rem" /> : <Add />}
-            onClick={() => handlerAsyncCounterByAmount(true)}
-          >
-            <Typography
-              variant="button"
-              color="initial"
-              noWrap
-            >{`Async ${amount}`}</Typography>
-          </Button>
-        </Box>
-      </Box>
-    </Grid>
+      </Grid>
+    </Paper>
   );
 }
 

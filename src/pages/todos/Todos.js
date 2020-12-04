@@ -1,4 +1,4 @@
-import { Typography } from "@material-ui/core";
+import { Paper, Typography, Container } from "@material-ui/core";
 import React from "react";
 import TodoList from "./TodoList";
 import TodoNew from "./TodoNew";
@@ -6,11 +6,15 @@ import TodoNew from "./TodoNew";
 const Todos = () => {
   return (
     <>
-      <Typography variant="h5" color="initial" align="center">
-        Todos
-      </Typography>
-      <TodoNew />
-      <TodoList />
+      <Container maxWidth="sm">
+        <Paper>
+          <Typography variant="h5" color="initial" align="center">
+            Todos
+          </Typography>
+          <TodoNew />
+          <TodoList />
+        </Paper>
+      </Container>
     </>
   );
 };
