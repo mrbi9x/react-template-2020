@@ -13,7 +13,7 @@ import { MoreVert as MoreVertIcon } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    margin: theme.spacing(2, 0),
+    margin: theme.spacing(2, 2),
   },
 }));
 

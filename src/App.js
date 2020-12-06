@@ -2,7 +2,6 @@ import {
   ThemeProvider,
   CssBaseline,
   Container,
-  Paper,
   Box,
   Hidden,
 } from "@material-ui/core";
@@ -14,6 +13,7 @@ import Todos from "./pages/todos/Todos";
 import BottomNavigatorBar from "./components/BottomNavigatorBar";
 import HomePage from "./pages/home/HomePage";
 import Posts from "./pages/posts/Posts";
+import Test1 from "pages/tests/Test1";
 
 function App() {
   return (
@@ -36,6 +36,9 @@ function App() {
               </Route>
               <Route path="/">
                 <HomePage />
+              </Route>
+              <Route path="/test">
+                <Test1 />
               </Route>
               <Route path="*">
                 <HomePage />
