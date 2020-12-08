@@ -13,7 +13,14 @@ import Todos from "./pages/todos/Todos";
 import BottomNavigatorBar from "./components/BottomNavigatorBar";
 import HomePage from "./pages/home/HomePage";
 import Posts from "./pages/posts/Posts";
-import Test1 from "pages/tests/Test1";
+import Feeds from "./pages/home/Feeds";
+import InfiniteList from "./components/infinite-list/InfiniteList";
+
+
+//pollyfill for ResizeObserver
+if (typeof ResizeObserver === "undefined") {
+  global.ResizeObserver = require("resize-observer-polyfill").default;
+}
 
 function App() {
   return (
@@ -34,7 +41,7 @@ function App() {
                 <Posts />
               </Route>
               <Route path="/testVirtuoso">
-                <Test1 />
+                <InfiniteList />
               </Route>
               <Route path="/">
                 <HomePage />

@@ -1,15 +1,56 @@
 import React from "react";
 import Container from "@material-ui/core/Container";
-import Feeds from "./Feeds";
-import Grid from "@material-ui/core/Grid";
+import InfiniteWindowScrollList from "pages/tests/InfiniteWindowScrollList";
+import { Paper, Grid, Typography, Box, Hidden, useMediaQuery, useTheme } from "@material-ui/core";
 
-// import Test1 from "pages/tests/Test1";
+function useWidth() {
+  const theme = useTheme();
+  const keys = [...theme.breakpoints.keys].reverse();
+  return (
+    keys.reduce((output, key) => {
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      const matches = useMediaQuery(theme.breakpoints.up(key));
+      return !output && matches ? key : output;
+    }, null) || 'xs'
+  );
+}
+
 const HomePage = () => {
+
+  const width = useWidth();
+
+
   return (
     <>
-      <Container maxWidth="sm" disableGutters>
-        <Feeds />
-      </Container>
+      <Grid
+        container
+        spacing={1}
+        direction="row"
+        justify="space-around"
+        wrap="nowrap"
+      >
+        <Hidden mdDown>
+          <Grid container item lg={3}>
+            <Box width="100%">
+              <Paper><Typography variant="h6" color="initial">Left</Typography></Paper>
+            </Box>
+          </Grid>
+        </Hidden>
+        <Grid item lg={6} md={10} sm={12} xs={12} style={{ maxWidth: '800px' }}>
+          <Paper><Typography variant="h6" color="initial">{width}</Typography></Paper>
+          <Container maxWidth="md" disableGutters>
+            <InfiniteWindowScrollList />
+          </Container>
+        </Grid>
+        <Hidden smDown>
+          <Grid container item lg={3} md>
+            <Box width="100%">
+              <Paper><Typography variant="h6" color="initial">Right</Typography></Paper>
+            </Box>
+          </Grid>
+        </Hidden>
+      </Grid>
+
     </>
   );
 };

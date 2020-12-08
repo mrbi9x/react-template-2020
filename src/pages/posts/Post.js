@@ -15,30 +15,30 @@ import { MoreVert as MoreVertIcon, Favorite, Share } from "@material-ui/icons";
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: theme.spacing(2, 2),
-    // height: 50 + Math.round(Math.random() * 100),
   },
 }));
 
-export default function Post({ index, content }) {
+export default function Post(props) {
+  const { index, content} = props;
   const classes = useStyles();
 
   return (
     <>
       <Card className={classes.root}>
         <CardHeader
-          avatar={<Avatar aria-label="avatar"></Avatar>}
+          avatar={<Avatar aria-label="avatar">{index}</Avatar>}
           action={
             <IconButton aria-label="mores">
               <MoreVertIcon />
             </IconButton>
           }
           title={`Title ${index}`}
-          subheader="subheader"
+          subheader={`subheader ${index}`}
         />
         <CardActionArea disableRipple>
           <CardContent>
             <Typography variant="body2" color="initial">
-              {content}
+              {content? content : 'No content'}
             </Typography>
           </CardContent>
         </CardActionArea>
