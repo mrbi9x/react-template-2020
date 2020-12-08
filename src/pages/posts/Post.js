@@ -7,17 +7,19 @@ import {
   CardContent,
   Typography,
   CardActionArea,
+  CardActions,
 } from "@material-ui/core";
 import React from "react";
-import { MoreVert as MoreVertIcon } from "@material-ui/icons";
+import { MoreVert as MoreVertIcon, Favorite, Share } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: theme.spacing(2, 2),
+    // height: 50 + Math.round(Math.random() * 100),
   },
 }));
 
-export default function Post() {
+export default function Post({ index, content }) {
   const classes = useStyles();
 
   return (
@@ -30,15 +32,24 @@ export default function Post() {
               <MoreVertIcon />
             </IconButton>
           }
-          title="title"
+          title={`Title ${index}`}
           subheader="subheader"
         />
-        <CardContent>
-          <Typography variant="body2" color="initial">
-            Test post content
-          </Typography>
-        </CardContent>
-        <CardActionArea></CardActionArea>
+        <CardActionArea disableRipple>
+          <CardContent>
+            <Typography variant="body2" color="initial">
+              {content}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+        <CardActions>
+          <IconButton aria-label="add to favorites">
+            <Favorite />
+          </IconButton>
+          <IconButton aria-label="Share" style={{ marginLeft: "auto" }}>
+            <Share />
+          </IconButton>
+        </CardActions>
       </Card>
     </>
   );

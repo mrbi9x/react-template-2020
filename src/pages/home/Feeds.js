@@ -17,7 +17,7 @@ export default function Feeds() {
     console.log("Load next page", ...args);
     setNextPageLoading(true);
     setTimeout(() => {
-      //   setHasNextPage(items.length < 150);
+      setHasNextPage(items.length < 9999);
       const newItems = [...items].concat(new Array(50).fill(null));
       setItems(newItems);
       setNextPageLoading(false);
@@ -34,9 +34,7 @@ export default function Feeds() {
     const isOdd = index % 2;
     const itemStyle = {
       backgroundColor: isOdd ? "#f9f9f9" : "white",
-      //   left: style.left + GUTTER_SIZE,
       top: style.top + GUTTER_SIZE,
-      //   width: style.width - GUTTER_SIZE,
       height: style.height - GUTTER_SIZE,
     };
     if (!isItemLoaded(index)) {

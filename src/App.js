@@ -23,7 +23,6 @@ function App() {
         <Header />
         <Container maxWidth="lg">
           <Box my={2}>
-            {/* <Paper> */}
             <Switch>
               <Route path="/counter">
                 <Counter />
@@ -34,17 +33,16 @@ function App() {
               <Route path="/posts">
                 <Posts />
               </Route>
+              <Route path="/testVirtuoso">
+                <Test1 />
+              </Route>
               <Route path="/">
                 <HomePage />
-              </Route>
-              <Route path="/test">
-                <Test1 />
               </Route>
               <Route path="*">
                 <HomePage />
               </Route>
             </Switch>
-            {/* </Paper> */}
           </Box>
           <Hidden smUp>&nbsp;</Hidden>
           <BottomNavigatorBar />

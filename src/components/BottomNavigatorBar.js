@@ -5,7 +5,13 @@ import {
   makeStyles,
   Badge,
 } from "@material-ui/core";
-import { Home, Menu, Notifications, Chat } from "@material-ui/icons";
+import {
+  Home,
+  Menu,
+  Notifications,
+  Chat,
+  TrendingUp,
+} from "@material-ui/icons";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { NavLink, useLocation } from "react-router-dom";
@@ -61,6 +67,13 @@ const BottomNavigatorBar = () => {
           component={NavLink}
           to="/counter"
         />
+        <BottomNavigationAction
+          label="Virtuoso"
+          value="/testVirtuoso"
+          icon={<TrendingUp />}
+          component={NavLink}
+          to="/testVirtuoso"
+        />{" "}
         <BottomNavigationAction
           label="Posts"
           value="/posts"
