@@ -1,24 +1,24 @@
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef, useState, useCallback, useRef } from "react";
 import { DynamicSizeList as List } from "react-window";
 import { loremIpsum } from "lorem-ipsum";
-import { ReactWindowScroller } from "react-window-scroller";
-import { WindowScroller } from 'react-virtualized'
 import InfiniteLoader from "react-window-infinite-loader";
-import { useCallback } from "react";
 import Post from "pages/posts/Post";
+import { WindowScroller } from "react-virtualized";
 
 const Row = ({ data, index, style, forwardedRef }) => {
   const isLoadedRow = index < data.length;
   if (!isLoadedRow) {
-    return (<div ref={forwardedRef} style={style}>
-      Loading...
-    </div>)
+    return (
+      <div ref={forwardedRef} style={{ ...style, textAlign: "center" }}>
+        Loading...
+      </div>
+    );
   }
   return (
     <div ref={forwardedRef} style={style}>
       <Post index={index} content={data[index]} />
     </div>
-  )
+  );
 };
 
 const RefForwardedRow = forwardRef((props, ref) => (
@@ -29,6 +29,7 @@ export default function Test1() {
   const [items, setItems] = useState([]);
   const [hasNextPage, setHasNextPage] = useState(true);
   const [nextPageLoading, setNextPageLoading] = useState(false);
+  const listRef = useRef(undefined);
 
   const loadNextPageCb = useCallback(
     (...args) => {
@@ -52,7 +53,11 @@ export default function Test1() {
     [items]
   );
 
-  const loadMoreItems = nextPageLoading ? () => { } : loadNextPageCb;
+  const onScroll = useCallback(({ scrollTop }) => {
+    listRef.current?.scrollTo(scrollTop);
+  }, []);
+
+  const loadMoreItems = nextPageLoading ? () => {} : loadNextPageCb;
 
   const isItemLoaded = (index) => !hasNextPage || index < items.length;
 
@@ -60,6 +65,7 @@ export default function Test1() {
 
   return (
     <>
+      <WindowScroller onScroll={onScroll}>{() => <div />}</WindowScroller>
       <InfiniteLoader
         itemCount={itemCount}
         isItemLoaded={isItemLoaded}
@@ -68,22 +74,16 @@ export default function Test1() {
         threshold={15}
       >
         {({ onItemsRendered }) => (
-          <ReactWindowScroller throttleTime={0}>
-            {({ ref, outerRef, style, onScroll }) => (
-              <List
-                height={window.innerHeight}
-                itemCount={itemCount}
-                itemData={items}
-                ref={ref}
-                outerRef={outerRef}
-                style={style}
-                onScroll={onScroll}
-                onItemsRendered={onItemsRendered}
-              >
-                {RefForwardedRow}
-              </List>
-            )}
-          </ReactWindowScroller>
+          <List
+            height={window.innerHeight}
+            itemCount={itemCount}
+            itemData={items}
+            ref={listRef}
+            onItemsRendered={onItemsRendered}
+            style={{ height: "100% !important" }}
+          >
+            {RefForwardedRow}
+          </List>
         )}
       </InfiniteLoader>
     </>
