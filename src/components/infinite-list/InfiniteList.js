@@ -1,15 +1,30 @@
-import React, { forwardRef, useState, useCallback, useRef } from "react";
+import React, {
+  forwardRef,
+  useState,
+  useCallback,
+  useRef,
+  useEffect,
+} from "react";
 import { DynamicSizeList as List } from "react-window";
 import { loremIpsum } from "lorem-ipsum";
 import AutoSizer from "react-virtualized-auto-sizer";
 import InfiniteLoader from "react-window-infinite-loader";
+import InfiniteListItem from "./InfiniteListItem";
 
-const Row = ({ data, index, style, forwardedRef }) => {
+const LoadingItem = (props) => {
+  console.log(props);
+  return <div>Loading...</div>;
+};
+
+const Row = (props) => {
+  const { data, index, style, forwardedRef, isScrolling } = props;
+  console.log(forwardedRef);
+
   const isLoadedRow = index < data.length;
   if (!isLoadedRow) {
     return (
       <div ref={forwardedRef} style={style}>
-        Loading...
+        {data.loadingItem}
       </div>
     );
   }
@@ -29,10 +44,10 @@ const Row = ({ data, index, style, forwardedRef }) => {
 };
 
 const RefForwardedRow = forwardRef((props, ref) => (
-  <Row {...props} forwardedRef={ref} />
+  <InfiniteListItem {...props} forwardedRef={ref} />
 ));
 
-export default function InfiniteList() {
+export default function InfiniteList(props) {
   const [items, setItems] = useState([]);
   const [hasNextPage, setHasNextPage] = useState(true);
   const [nextPageLoading, setNextPageLoading] = useState(false);
@@ -53,7 +68,7 @@ export default function InfiniteList() {
         setItems(nextItems);
         setHasNextPage(nextItems.length < 100);
         setNextPageLoading(false);
-      }, 100);
+      }, 5000);
     },
     [items]
   );
@@ -66,7 +81,7 @@ export default function InfiniteList() {
 
   return (
     <>
-      <div style={{ width: "80%", height: window.innerHeight - 200 }}>
+      <div style={{ width: "100%", height: "600px" }}>
         <InfiniteLoader
           itemCount={itemCount}
           isItemLoaded={isItemLoaded}
@@ -77,13 +92,14 @@ export default function InfiniteList() {
             <AutoSizer>
               {({ width, height }) => (
                 <List
+                  autoHeight
                   height={height}
                   width={width}
                   itemCount={itemCount}
-                  itemData={items}
+                  itemData={{ items, loadingItem: <LoadingItem /> }}
                   ref={ref}
                   onItemsRendered={onItemsRendered}
-                  useIsScrolling={true}
+                  useIsScrolling
                 >
                   {RefForwardedRow}
                 </List>

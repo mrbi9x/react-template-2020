@@ -16,7 +16,6 @@ import Posts from "./pages/posts/Posts";
 import Feeds from "./pages/home/Feeds";
 import InfiniteList from "./components/infinite-list/InfiniteList";
 
-
 //pollyfill for ResizeObserver
 if (typeof ResizeObserver === "undefined") {
   global.ResizeObserver = require("resize-observer-polyfill").default;

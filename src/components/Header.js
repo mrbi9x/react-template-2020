@@ -37,39 +37,47 @@ function Header() {
   const classes = useStyles();
 
   return (
-    <AppBar position="sticky" className={classes.appBar}>
-      <Container maxWidth="lg">
-        <Toolbar disableGutters>
-          <Grid
-            container
-            item
-            wrap="nowrap"
-            justify="space-between"
-            alignContent="center"
-            alignItems="center"
-          >
-            <NavLink to="/" className={classes.brandHeader}>
-              <BubbleChart color="secondary" fontSize="large" />
-              <Typography color="primary" variant="h6" component="span" noWrap>
-                React template
-              </Typography>
-            </NavLink>
-            <IconButton
-              aria-label="current user"
-              onClick={(e) => console.log(e)}
+    <>
+      <AppBar position="fixed" className={classes.appBar}>
+        <Container maxWidth="lg">
+          <Toolbar disableGutters>
+            <Grid
+              container
+              item
+              wrap="nowrap"
+              justify="space-between"
+              alignContent="center"
+              alignItems="center"
             >
-              <Badge
-                badgeContent={notifyCount}
-                color="error"
-                invisible={notifyCount < 1}
+              <NavLink to="/" className={classes.brandHeader}>
+                <BubbleChart color="secondary" fontSize="large" />
+                <Typography
+                  color="primary"
+                  variant="h6"
+                  component="span"
+                  noWrap
+                >
+                  React template
+                </Typography>
+              </NavLink>
+              <IconButton
+                aria-label="current user"
+                onClick={(e) => console.log(e)}
               >
-                <Avatar className={classes.smallAvatar} />
-              </Badge>
-            </IconButton>
-          </Grid>
-        </Toolbar>
-      </Container>
-    </AppBar>
+                <Badge
+                  badgeContent={notifyCount}
+                  color="error"
+                  invisible={notifyCount < 1}
+                >
+                  <Avatar className={classes.smallAvatar} />
+                </Badge>
+              </IconButton>
+            </Grid>
+          </Toolbar>
+        </Container>
+      </AppBar>
+      <Toolbar disableGutters />
+    </>
   );
 }
 
