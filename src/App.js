@@ -2,7 +2,6 @@ import {
   ThemeProvider,
   CssBaseline,
   Container,
-  Box,
   Hidden,
 } from "@material-ui/core";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -13,9 +12,7 @@ import Todos from "./pages/todos/Todos";
 import BottomNavigatorBar from "./components/BottomNavigatorBar";
 import HomePage from "./pages/home/HomePage";
 import Posts from "./pages/posts/Posts";
-import Feeds from "./pages/home/Feeds";
-import InfiniteList from "./components/infinite-list/InfiniteList";
-
+import DynamicVirtualList from "pages/dynamic-virtual-list/DynamicVirtualList";
 
 //pollyfill for ResizeObserver
 if (typeof ResizeObserver === "undefined") {
@@ -29,31 +26,29 @@ function App() {
         <CssBaseline />
         <Header />
         <Container maxWidth="lg">
-          <Box my={2}>
-            <Switch>
-              <Route path="/counter">
-                <Counter />
-              </Route>
-              <Route path="/todos">
-                <Todos />
-              </Route>
-              <Route path="/posts">
-                <Posts />
-              </Route>
-              <Route path="/testVirtuoso">
-                <InfiniteList />
-              </Route>
-              <Route path="/">
-                <HomePage />
-              </Route>
-              <Route path="*">
-                <HomePage />
-              </Route>
-            </Switch>
-          </Box>
+          <Switch>
+            <Route path="/counter">
+              <Counter />
+            </Route>
+            <Route path="/todos">
+              <Todos />
+            </Route>
+            <Route path="/posts">
+              <Posts />
+            </Route>
+            <Route path="/dynamicVirtualList">
+              <DynamicVirtualList />
+            </Route>
+            <Route path="/">
+              <HomePage />
+            </Route>
+            <Route path="*">
+              <HomePage />
+            </Route>
+          </Switch>
           <Hidden smUp>&nbsp;</Hidden>
-          <BottomNavigatorBar />
         </Container>
+        <BottomNavigatorBar />
       </Router>
     </ThemeProvider>
   );

@@ -1,7 +1,15 @@
 import React from "react";
 import Container from "@material-ui/core/Container";
 import InfiniteWindowScrollList from "pages/tests/InfiniteWindowScrollList";
-import { Paper, Grid, Typography, Box, Hidden, useMediaQuery, useTheme } from "@material-ui/core";
+import {
+  Paper,
+  Grid,
+  Typography,
+  Box,
+  Hidden,
+  useMediaQuery,
+  useTheme,
+} from "@material-ui/core";
 
 function useWidth() {
   const theme = useTheme();
@@ -11,14 +19,12 @@ function useWidth() {
       // eslint-disable-next-line react-hooks/rules-of-hooks
       const matches = useMediaQuery(theme.breakpoints.up(key));
       return !output && matches ? key : output;
-    }, null) || 'xs'
+    }, null) || "xs"
   );
 }
 
 const HomePage = () => {
-
   const width = useWidth();
-
 
   return (
     <>
@@ -32,12 +38,20 @@ const HomePage = () => {
         <Hidden mdDown>
           <Grid container item lg={3}>
             <Box width="100%">
-              <Paper><Typography variant="h6" color="initial">Left</Typography></Paper>
+              <Paper>
+                <Typography variant="h6" color="initial">
+                  Left
+                </Typography>
+              </Paper>
             </Box>
           </Grid>
         </Hidden>
-        <Grid item lg={6} md={10} sm={12} xs={12} style={{ maxWidth: '800px' }}>
-          <Paper><Typography variant="h6" color="initial">{width}</Typography></Paper>
+        <Grid item lg={6} md={10} sm={12} xs={12} style={{ maxWidth: "720px" }}>
+          <Paper>
+            <Typography variant="h6" color="initial">
+              {width}
+            </Typography>
+          </Paper>
           <Container maxWidth="md" disableGutters>
             <InfiniteWindowScrollList />
           </Container>
@@ -45,12 +59,15 @@ const HomePage = () => {
         <Hidden smDown>
           <Grid container item lg={3} md>
             <Box width="100%">
-              <Paper><Typography variant="h6" color="initial">Right</Typography></Paper>
+              <Paper>
+                <Typography variant="h6" color="initial">
+                  Right
+                </Typography>
+              </Paper>
             </Box>
           </Grid>
         </Hidden>
       </Grid>
-
     </>
   );
 };

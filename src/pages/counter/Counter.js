@@ -18,6 +18,7 @@ import {
   asyncMinusByAmount,
   asyncPlusByAmount,
 } from "./couterSlice";
+import PostLoading from "pages/posts/PostLoading";
 
 function Counter() {
   const { count, loading } = useSelector((state) => state.counter);
@@ -134,6 +135,7 @@ function Counter() {
           </Box>
         </Box>
       </Grid>
+      <PostLoading />
     </Paper>
   );
 }
