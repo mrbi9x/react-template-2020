@@ -52,7 +52,11 @@ const HomePage = () => {
               {width}
             </Typography>
           </Paper>
-          <Container maxWidth="md" disableGutters>
+          <Container
+            maxWidth="md"
+            disableGutters
+            style={{ paddingBottom: "64px" }}
+          >
             <InfiniteWindowScrollList />
           </Container>
         </Grid>

@@ -3,6 +3,7 @@ import {
   CssBaseline,
   Container,
   Hidden,
+  makeStyles,
 } from "@material-ui/core";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "./components/Header";
@@ -19,13 +20,28 @@ if (typeof ResizeObserver === "undefined") {
   global.ResizeObserver = require("resize-observer-polyfill").default;
 }
 
+const useStyles = makeStyles((theme) => ({
+  appContainer: {
+    display: "flex",
+    height: "calc(100vh - 56px - 56px)",
+    [`${theme.breakpoints.up("xs")} and (orientation: landscape)`]: {
+      height: "calc(100vh - 48px - 48px)",
+    },
+    [theme.breakpoints.up("sm")]: {
+      height: "calc(100vh - 64px - 64px)",
+    },
+  },
+}));
+
 function App() {
+  const classes = useStyles();
+
   return (
     <ThemeProvider theme={theme}>
       <Router>
         <CssBaseline />
         <Header />
-        <Container maxWidth="lg">
+        <Container maxWidth="lg" className={classes.appContainer}>
           <Switch>
             <Route path="/counter">
               <Counter />
