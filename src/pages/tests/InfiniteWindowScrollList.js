@@ -1,22 +1,17 @@
-import React, { forwardRef, useState, useCallback, useRef } from "react";
+import React, { forwardRef, useCallback, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPosts } from "pages/posts/postsSlice";
 import { DynamicSizeList as List } from "react-window";
 import { loremIpsum } from "lorem-ipsum";
 import InfiniteLoader from "react-window-infinite-loader";
 import Post from "pages/posts/Post";
 import { WindowScroller } from "react-virtualized";
 
-const Row = ({ data, index, style, forwardedRef }) => {
-  const isLoadedRow = index < data.length;
-  if (!isLoadedRow) {
-    return (
-      <div ref={forwardedRef} style={{ ...style, textAlign: "center" }}>
-        Loading...
-      </div>
-    );
-  }
+const Row = (props) => {
+  const { style, forwardedRef } = props;
   return (
     <div ref={forwardedRef} style={style}>
-      <Post index={index} content={data[index]} />
+      <Post {...props} />
     </div>
   );
 };
@@ -25,43 +20,26 @@ const RefForwardedRow = forwardRef((props, ref) => (
   <Row {...props} forwardedRef={ref} />
 ));
 
-export default function Test1() {
-  const [items, setItems] = useState([]);
-  const [hasNextPage, setHasNextPage] = useState(true);
-  const [nextPageLoading, setNextPageLoading] = useState(false);
-  const listRef = useRef(undefined);
-
-  const loadNextPageCb = useCallback(
-    (...args) => {
-      console.log("Load next page", ...args);
-      setNextPageLoading(true);
-      setTimeout(() => {
-        const newItems = new Array(30).fill(true).map(() =>
-          loremIpsum({
-            units: "paragraphs",
-            paragraphLowerBound: 1,
-            paragraphUpperBound: 10,
-          })
-        );
-        const nextItems = [...items, ...newItems];
-        console.log(nextItems.length);
-        setItems(nextItems);
-        setHasNextPage(nextItems.length < 50);
-        setNextPageLoading(false);
-      }, 1000);
-    },
-    [items]
+export default function InfiniteWindowScrollList() {
+  const { entities, status, currentPage, hasNextPage } = useSelector(
+    (state) => state.posts
   );
+  const dispatch = useDispatch();
+
+  const fetchPostsCallback = useCallback(() => {
+    dispatch(fetchPosts(currentPage + 1));
+  }, [dispatch, currentPage]);
+  const listRef = useRef(undefined);
 
   const onScroll = useCallback(({ scrollTop }) => {
     listRef.current?.scrollTo(scrollTop);
   }, []);
 
-  const loadMoreItems = nextPageLoading ? () => {} : loadNextPageCb;
+  const loadMoreItems = status === "loading" ? () => {} : fetchPostsCallback;
 
-  const isItemLoaded = (index) => !hasNextPage || index < items.length;
+  const isItemLoaded = (index) => !hasNextPage || index < entities.length;
 
-  const itemCount = hasNextPage ? items.length + 1 : items.length;
+  const itemCount = hasNextPage ? entities.length + 1 : entities.length;
 
   return (
     <>
@@ -77,7 +55,6 @@ export default function Test1() {
           <List
             height={window.innerHeight}
             itemCount={itemCount}
-            itemData={items}
             ref={listRef}
             onItemsRendered={onItemsRendered}
             style={{ height: "100% !important" }}

@@ -56,7 +56,7 @@ export default function Post(props) {
       <Card className={classes.root}>
         <CardHeader
           avatar={
-            true ? (
+            isScrolling ? (
               <Skeleton
                 animation="wave"
                 variant="circle"
@@ -88,7 +88,7 @@ export default function Post(props) {
             {url}
           </Typography>
         </CardContent>
-        {index % 2 === 0 && (
+        {url && (
           <CardActionArea className={classes.cardMedia}>
             {isScrolling ? (
               mediaTracking
