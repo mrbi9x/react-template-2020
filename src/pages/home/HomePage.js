@@ -1,6 +1,6 @@
 import React from "react";
 import Container from "@material-ui/core/Container";
-import InfiniteWindowScrollList from "pages/tests/InfiniteWindowScrollList";
+import InfiniteWindowScrollList from "components/infinite-list/InfiniteWindowScrollList";
 import {
   Paper,
   Grid,

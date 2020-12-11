@@ -57,7 +57,7 @@ const BottomNavigatorBar = () => {
         <BottomNavigation
           value={pathname}
           className={classes.bottomNavigation}
-          showLabels={true}
+          showLabels={false}
         >
           <BottomNavigationAction
             label="Home"
