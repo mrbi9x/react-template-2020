@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import Container from "@material-ui/core/Container";
 import InfiniteWindowScrollList from "pages/tests/InfiniteWindowScrollList";
 import {
@@ -30,9 +30,9 @@ const HomePage = () => {
     <>
       <Grid
         container
-        spacing={1}
         direction="row"
-        justify="space-around"
+        justify="space-between"
+        alignItems="stretch"
         wrap="nowrap"
       >
         <Hidden mdDown>

@@ -8,7 +8,7 @@ import {
   Typography,
   CardActions,
   CardActionArea,
-  CardMedia,
+  Divider,
 } from "@material-ui/core";
 import React from "react";
 import {
@@ -22,10 +22,20 @@ import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    margin: theme.spacing(2, 2),
+    margin: theme.spacing(2.5, 1),
+  },
+  cardHeader: {
+    // backgroundColor: theme.palette.background.default,
+    paddingBottom: theme.spacing(1),
+  },
+  cardContent: {
+    padding: theme.spacing(1),
   },
   cardMedia: {
-    height: "400px",
+    padding: theme.spacing(1, 0),
+  },
+  cardActions: {
+    // backgroundColor: theme.palette.background.default,
   },
 }));
 
@@ -42,11 +52,6 @@ export default function Post(props) {
   );
   const subheaderTracking = isScrolling ? (
     <Skeleton animation="wave" width="40%" />
-  ) : (
-    `Album ${albumId}`
-  );
-  const mediaTracking = isScrolling ? (
-    <Skeleton animation="wave" variant="rect" className={classes.cardMedia} />
   ) : (
     `Album ${albumId}`
   );
@@ -76,32 +81,29 @@ export default function Post(props) {
           }
           title={titleTracking}
           subheader={subheaderTracking}
+          className={classes.cardHeader}
         />
-        <CardContent>
+        <Divider />
+        <CardContent className={classes.cardContent}>
           <Typography variant="body1" color="initial">
             {postEntity ? title : "No content"}
           </Typography>
           <Typography variant="body2" color="initial">
             {thumbnailUrl}
           </Typography>
-          <Typography variant="subtitle2" color="initial">
+          <Typography variant="subtitle2" color="initial" noWrap={false}>
             {url}
           </Typography>
         </CardContent>
         {url && (
           <CardActionArea className={classes.cardMedia}>
-            {isScrolling ? (
-              mediaTracking
-            ) : (
-              <CardMedia
-                title="title"
-                image={url}
-                className={classes.cardMedia}
-              />
-            )}
+            <div style={{ "--aspect-ratio": 16 / 9 }}>
+              <img src={url} alt={title ? title : "images"} />
+            </div>
           </CardActionArea>
         )}
-        <CardActions>
+        <Divider />
+        <CardActions className={classes.cardActions}>
           <IconButton aria-label="add to favorites">
             {index % 2 ? <FavoriteBorder /> : <Favorite color="secondary" />}
           </IconButton>

@@ -1,8 +1,8 @@
 import React from "react";
 
 export default function InfiniteListItem(props) {
-  const { data, index, style, forwardedRef, isScrolling } = props;
-  const { totalItems, ItemRender, ItemLoadingRender, isItemLoaded } = data;
+  const { data, index, style, forwardedRef } = props;
+  const { ItemRender, ItemLoadingRender, isItemLoaded = true } = data;
 
   if (!isItemLoaded(index)) {
     return (

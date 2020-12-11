@@ -38,10 +38,16 @@ const useStyles = makeStyles((theme) => ({
 const BottomNavigatorBar = () => {
   const { pathname } = useLocation();
   const todosCount = useSelector((state) => state.todos.length);
+  const counterCount = useSelector((state) => state.counter.count);
   const classes = useStyles();
   const TodoIcon = (
-    <Badge badgeContent={todosCount} color="secondary" max={9} variant="dot">
+    <Badge badgeContent={todosCount} color="primary" max={9} variant="dot">
       <Chat />
+    </Badge>
+  );
+  const NotifyIcon = (
+    <Badge badgeContent={counterCount} color="secondary" max={9} variant="dot">
+      <Notifications />
     </Badge>
   );
   return (
@@ -74,7 +80,7 @@ const BottomNavigatorBar = () => {
           <BottomNavigationAction
             label="Counter"
             value="/counter"
-            icon={<Notifications />}
+            icon={NotifyIcon}
             component={NavLink}
             to="/counter"
             disableRipple

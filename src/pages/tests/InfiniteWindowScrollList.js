@@ -2,13 +2,12 @@ import React, { forwardRef, useCallback, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPosts } from "pages/posts/postsSlice";
 import { DynamicSizeList as List } from "react-window";
-import { loremIpsum } from "lorem-ipsum";
 import InfiniteLoader from "react-window-infinite-loader";
 import Post from "pages/posts/Post";
 import { WindowScroller } from "react-virtualized";
 
 const Row = (props) => {
-  const { style, forwardedRef } = props;
+  const { style, forwardedRef, index } = props;
   return (
     <div ref={forwardedRef} style={style}>
       <Post {...props} />
@@ -31,9 +30,12 @@ export default function InfiniteWindowScrollList() {
   }, [dispatch, currentPage]);
   const listRef = useRef(undefined);
 
-  const onScroll = useCallback(({ scrollTop }) => {
-    listRef.current?.scrollTo(scrollTop);
-  }, []);
+  const onScroll = useCallback(
+    ({ scrollTop }) => {
+      listRef.current?.scrollTo(scrollTop);
+    },
+    [listRef]
+  );
 
   const loadMoreItems = status === "loading" ? () => {} : fetchPostsCallback;
 
