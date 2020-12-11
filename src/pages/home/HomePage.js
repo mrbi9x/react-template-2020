@@ -55,6 +55,7 @@ const HomePage = () => {
           <Container
             maxWidth="md"
             disableGutters
+            fixed
             style={{ paddingBottom: "64px" }}
           >
             <InfiniteWindowScrollList />

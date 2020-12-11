@@ -7,28 +7,56 @@ import {
   CardContent,
   Typography,
   CardActions,
+  CardActionArea,
+  CardMedia,
 } from "@material-ui/core";
 import React from "react";
-import { MoreVert as MoreVertIcon, Favorite, Share } from "@material-ui/icons";
+import {
+  MoreVert as MoreVertIcon,
+  FavoriteBorder,
+  Favorite,
+  Share,
+} from "@material-ui/icons";
 import Skeleton from "@material-ui/lab/Skeleton";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: theme.spacing(2, 2),
   },
+  cardMedia: {
+    height: "400px",
+  },
 }));
 
 export default function Post(props) {
-  const { index, content, isScrolling } = props;
+  const { index, isScrolling } = props;
+  const postEntity = useSelector((state) => state.posts.entities[index]);
+  const { id, albumId, title, thumbnailUrl, url } = postEntity || {};
   const classes = useStyles();
-  const subheaderTracking = isScrolling ? "scolling..." : `subheader ${index}`;
+
+  const titleTracking = isScrolling ? (
+    <Skeleton animation="wave" width="80%" />
+  ) : (
+    `Post ${id}`
+  );
+  const subheaderTracking = isScrolling ? (
+    <Skeleton animation="wave" width="40%" />
+  ) : (
+    `Album ${albumId}`
+  );
+  const mediaTracking = isScrolling ? (
+    <Skeleton animation="wave" variant="rect" className={classes.cardMedia} />
+  ) : (
+    `Album ${albumId}`
+  );
 
   return (
     <>
       <Card className={classes.root}>
         <CardHeader
           avatar={
-            isScrolling ? (
+            true ? (
               <Skeleton
                 animation="wave"
                 variant="circle"
@@ -36,7 +64,9 @@ export default function Post(props) {
                 height={40}
               />
             ) : (
-              <Avatar aria-label="avatar">{index}</Avatar>
+              <Avatar aria-label="avatar" src={thumbnailUrl}>
+                {id}
+              </Avatar>
             )
           }
           action={
@@ -44,17 +74,36 @@ export default function Post(props) {
               <MoreVertIcon />
             </IconButton>
           }
-          title={`Title ${index}`}
+          title={titleTracking}
           subheader={subheaderTracking}
         />
         <CardContent>
+          <Typography variant="body1" color="initial">
+            {postEntity ? title : "No content"}
+          </Typography>
           <Typography variant="body2" color="initial">
-            {content ? content : "No content"}
+            {thumbnailUrl}
+          </Typography>
+          <Typography variant="subtitle2" color="initial">
+            {url}
           </Typography>
         </CardContent>
+        {index % 2 === 0 && (
+          <CardActionArea className={classes.cardMedia}>
+            {isScrolling ? (
+              mediaTracking
+            ) : (
+              <CardMedia
+                title="title"
+                image={url}
+                className={classes.cardMedia}
+              />
+            )}
+          </CardActionArea>
+        )}
         <CardActions>
           <IconButton aria-label="add to favorites">
-            <Favorite />
+            {index % 2 ? <FavoriteBorder /> : <Favorite color="secondary" />}
           </IconButton>
           <IconButton aria-label="Share" style={{ marginLeft: "auto" }}>
             <Share />

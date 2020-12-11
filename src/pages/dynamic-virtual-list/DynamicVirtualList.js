@@ -29,7 +29,7 @@ export default function DynamicVirtualList() {
     [items]
   );
   return (
-    <Container maxWidth="sm" disableGutters>
+    <Container maxWidth="sm" disableGutters fixed>
       <InfiniteList
         totalItems={items.length}
         itemRender={Post}

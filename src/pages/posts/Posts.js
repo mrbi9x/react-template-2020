@@ -1,15 +1,13 @@
-import React, { useEffect } from "react";
-import Typography from "@material-ui/core/Typography";
+import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPosts } from "./postsSlice";
 import {
-  Box,
-  Card,
-  CardContent,
-  CardMedia,
   Container,
   // makeStyles,
 } from "@material-ui/core";
+import InfiniteList from "components/infinite-list/InfiniteList";
+import Post from "./Post";
+import PostLoading from "./PostLoading";
 
 // const useStyles = makeStyles((theme) => ({
 //   root: {
@@ -18,41 +16,26 @@ import {
 // }));
 
 export default function Posts() {
-  const { entities, status } = useSelector((state) => state.posts);
+  const { entities, status, currentPage, hasNextPage } = useSelector(
+    (state) => state.posts
+  );
   const dispatch = useDispatch();
-  useEffect(() => {
-    if (status === "initial") {
-      dispatch(fetchPosts());
-    }
-  }, [dispatch, status]);
 
-  const postsList = (post) => {
-    return (
-      <Box my={5} key={post.id}>
-        <Card>
-          <CardMedia>
-            <Box>
-              <img alt={post.title} src={post.url} />
-            </Box>
-          </CardMedia>
-          <CardContent>
-            <Typography variant="body2" color="initial">
-              {post.title}
-            </Typography>
-          </CardContent>
-        </Card>
-      </Box>
-    );
-  };
+  const fetchPostsCallback = useCallback(() => {
+    dispatch(fetchPosts(currentPage + 1));
+  }, [dispatch, currentPage]);
 
   return (
     <>
-      <Typography variant="h5" color="initial" align="center">
-        Posts:
-      </Typography>
-      <span>{entities.length}</span>
       <Container maxWidth="sm" disableGutters fixed>
-        {entities.map((post) => postsList(post))}
+        <InfiniteList
+          totalItems={entities.length}
+          itemRender={Post}
+          itemLoadingRender={PostLoading}
+          hasNextPage={hasNextPage}
+          nextPageLoading={status === "loading"}
+          loadNextPage={fetchPostsCallback}
+        />
       </Container>
     </>
   );
