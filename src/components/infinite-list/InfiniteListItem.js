@@ -2,9 +2,9 @@ import React from "react";
 
 export default function InfiniteListItem(props) {
   const { data, index, style, forwardedRef } = props;
-  console.log(props);
-  const isLoadedRow = index < data.items.length;
-  if (data.loadingItem && !isLoadedRow) {
+  const { ItemRender, ItemLoadingRender, isItemLoaded = true } = data;
+
+  if (!isItemLoaded(index)) {
     return (
       <div
         ref={forwardedRef}
@@ -12,22 +12,19 @@ export default function InfiniteListItem(props) {
           ...style,
         }}
       >
-        <p>Loading...</p>
+        {ItemLoadingRender ? <ItemLoadingRender {...props} /> : undefined}
       </div>
     );
   }
+
   return (
     <div
       ref={forwardedRef}
       style={{
         ...style,
-        backgroundColor: index % 2 ? "white" : "#f0f0f0",
       }}
     >
-      <br />
-      {index}. {data.items[index]}
-      {data.loadingItem}
-      <p>&nbsp;</p>
+      {ItemRender ? <ItemRender {...props} /> : undefined}
     </div>
   );
 }

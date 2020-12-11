@@ -39,8 +39,8 @@ function Header() {
   return (
     <>
       <AppBar position="fixed" className={classes.appBar}>
-        <Container maxWidth="lg">
-          <Toolbar disableGutters>
+        <Container maxWidth="lg" disableGutters>
+          <Toolbar>
             <Grid
               container
               item
@@ -76,7 +76,7 @@ function Header() {
           </Toolbar>
         </Container>
       </AppBar>
-      <Toolbar disableGutters />
+      <Toolbar />
     </>
   );
 }
