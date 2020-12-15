@@ -7,7 +7,6 @@ import {
   Paper,
   TextField,
   Typography,
-  Container,
 } from "@material-ui/core";
 import React, { useState } from "react";
 import { Add, Remove } from "@material-ui/icons";
@@ -19,7 +18,6 @@ import {
   asyncMinusByAmount,
   asyncPlusByAmount,
 } from "./couterSlice";
-import PostLoading from "pages/posts/PostLoading";
 
 function Counter() {
   const { count, loading } = useSelector((state) => state.counter);

@@ -7,7 +7,7 @@ import Post from "pages/posts/Post";
 import { WindowScroller } from "react-virtualized";
 
 const Row = (props) => {
-  const { style, forwardedRef, index } = props;
+  const { style, forwardedRef } = props;
   return (
     <div ref={forwardedRef} style={style}>
       <Post {...props} />
